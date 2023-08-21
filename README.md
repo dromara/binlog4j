@@ -26,6 +26,49 @@
 
 ### 简单使用
 
+通过 BinlogClient 创建 binlog 客户端, IBinlogEventHandler 用于接受 binlog 事件通知。
+
+```java
+
+public class BootStrap {
+
+    public static void main(String[] args) {
+        
+        BinlogClientConfig clientConfig = new BinlogClientConfig();
+        clientConfig.setHost("127.0.0.1");
+        clientConfig.setPort(3306);
+        clientConfig.setUsername("root");
+        clientConfig.setPassword("taoren@123");
+        clientConfig.setServerId(1990);
+  
+        IBinlogClient binlogClient = new BinlogClient(clientConfig);
+
+        binlogClient.registerEventHandler("database", "table", new IBinlogEventHandler() {
+            
+            @Override
+            public void onInsert(Object data) {
+                System.out.println("插入数据:{}", data);
+            }
+
+            @Override
+            public void onUpdate(Object originalData, Object data) {
+                System.out.println("修改数据:{}", data);
+            }
+
+            @Override
+            public void onDelete(Object data) {
+                System.out.println("删除数据:{}", data);
+            }
+        });
+
+        binlogClient.connect();
+    }
+}
+
+```
+
+### 高级特性
+
 ```java
 
 public class BootStrap {
@@ -36,35 +79,34 @@ public class BootStrap {
         redisConfig.setHost("127.0.0.1");
         redisConfig.setPort(6379);
         redisConfig.setPassword("taoren@123");
-        
-        // Binlog 客户端【配置】 非 Spring
+
         BinlogClientConfig clientConfig = new BinlogClientConfig();
         clientConfig.setHost("127.0.0.1");
         clientConfig.setPort(3306);
         clientConfig.setUsername("root");
         clientConfig.setPassword("taoren@123");
-        clientConfig.setServerId(1990);
-        clientConfig.setRedisConfig(redisConfig); // 依赖中间件（支撑 持久化模式 与 高可用 集群）
-        clientConfig.setPersistence(true); // 持久化模式
+        clientConfig.setServerId(1990); // Client 编号
+        clientConfig.setRedisConfig(redisConfig); // Redis 配置
+        clientConfig.setPersistence(true); // 启用持久化
         clientConfig.setMode(BinlogClientMode.cluster); // 高可用集群
-        // clientConfig1.setMode(BinlogClientMode.standalone); // 单机模式
 
         BinlogClient binlogClient = new BinlogClient(clientConfig);
 
-        binlogClient.registerEventHandler("pear-admin", "sys_user", new IBinlogEventHandler() {
+        binlogClient.registerEventHandler("database", "table", new IBinlogEventHandler<User>() {
+
             @Override
             public void onInsert(Object data) {
-
+                System.out.println("插入数据:{}", data);
             }
 
             @Override
             public void onUpdate(Object originalData, Object data) {
-
+                System.out.println("修改数据:{}", data);
             }
 
             @Override
             public void onDelete(Object data) {
-
+                System.out.println("删除数据:{}", data);
             }
         });
 
@@ -75,6 +117,8 @@ public class BootStrap {
 ```
 
 ### Spring Boot 集成
+
+在 application.yml 中填写 BinlogClient 配置
 
 ```yaml
 
@@ -91,10 +135,10 @@ spring:
         host: 127.0.0.1
         port: 3306
         serverId: 1990
-        mode: cluster
-        persistence: false
 
 ```
+
+使用 @BinlogSubscriber 注解, 指定 IBinlogEventHandler 处理的表
 
 ```java
 
@@ -118,4 +162,3 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
 
 }
 ```
-
