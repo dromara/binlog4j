@@ -20,8 +20,14 @@
 <dependency>
    <groupId>com.gitee.Jmysy</groupId>
    <artifactId>binlog4j-core</artifactId>
-   <version>${latest.version}</version>
+   <version>latest.version</version>
 </dependency>
+```
+
+或
+
+```text
+implementation group: 'com.gitee.Jmysy', name: 'binlog4j-core', version: 'latest.version'
 ```
 
 ### 简单使用
@@ -116,6 +122,21 @@ public class BootStrap {
 
 ### Spring Boot 集成
 
+```agsl
+<dependency>
+    <groupId>com.gitee.Jmysy</groupId>
+    <artifactId>binlog4j-spring-boot-starter</artifactId>
+    <version>latest.version</version>
+</dependency>
+```
+
+或
+
+```text
+implementation group: 'com.gitee.Jmysy', name: 'binlog4j-spring-boot-starter', version: 'latest.version'
+```
+
+
 在 application.yml 中填写 BinlogClient 配置
 
 ```yaml
@@ -153,7 +174,7 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
 
     @Override
     public void onDelete(User target) {
-        System.out.println("删除数据");
+        System.out.println("删除数据:" + JSON.toJSONString(target));
     }
 
 }
