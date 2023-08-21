@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.gitee.Jmysy.binlog4j.springboot.starter.Binlog4jAutoConfiguration
