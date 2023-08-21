@@ -11,9 +11,9 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "spring.binlog4j")
 public class Binlog4jAutoProperties {
 
-    private RedisConfig redisConfig;
-
     private Map<String, BinlogClientConfig> clientConfigs;
+
+    private RedisConfig redisConfig;
 
     public Map<String, BinlogClientConfig> getClientConfigs() {
         return clientConfigs;

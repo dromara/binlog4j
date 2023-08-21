@@ -1,4 +1,4 @@
-package com.pearadmin.binlog4jcore.handler;
+package com.gitee.Jmysy.binlog4j.core.handler;
 
 import com.gitee.Jmysy.binlog4j.core.IBinlogEventHandler;
 

@@ -22,6 +22,6 @@ public class ClassUtils {
                 return (Class<T>) argTypes[0];
             }
         }
-        throw new IllegalArgumentException("Generic type not found");
+        return null;
     }
 }

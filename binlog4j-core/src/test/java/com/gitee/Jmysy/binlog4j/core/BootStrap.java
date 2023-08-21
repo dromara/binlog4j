@@ -1,10 +1,8 @@
-package com.pearadmin.binlog4jcore;
+package com.gitee.Jmysy.binlog4j.core;
 
-import com.gitee.Jmysy.binlog4j.core.BinlogClient;
-import com.gitee.Jmysy.binlog4j.core.BinlogClientConfig;
 import com.gitee.Jmysy.binlog4j.core.config.RedisConfig;
 import com.gitee.Jmysy.binlog4j.core.enums.BinlogClientMode;
-import com.pearadmin.binlog4jcore.handler.CustomEventHandler;
+import com.gitee.Jmysy.binlog4j.core.handler.CustomEventHandler;
 
 public class BootStrap {
 

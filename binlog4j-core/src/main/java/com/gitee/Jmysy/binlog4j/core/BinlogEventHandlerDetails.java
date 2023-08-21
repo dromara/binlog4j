@@ -50,7 +50,7 @@ public class BinlogEventHandlerDetails<T> {
         });
     }
 
-    public T toEntity(Serializable[] data) {
+    public Object toEntity(Serializable[] data) {
 
         String[] columnNames = JDBCUtils.getColumnNames(clientConfig, database, table);
 
@@ -62,6 +62,10 @@ public class BinlogEventHandlerDetails<T> {
                 data[i] = new Date(((Date) da).getTime() + clientConfig.getTimeOffset());
             }
             b.put(columnNames[i], data[i]);
+        }
+
+        if(entityClass == null) {
+            return b;
         }
 
         return TypeUtils.cast(b, entityClass, snakeCase);
