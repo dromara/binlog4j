@@ -14,8 +14,6 @@
  
 兼容 Spring Boot 2.x 与 Spring Boot 3.x 版本。
 
-数据审计, 计划功能, 待实现。
-
 ### 下载安装
 
 ```xml
