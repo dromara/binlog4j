@@ -44,6 +44,11 @@ public class BinlogClientConfig {
     private boolean keepAlive = true;
 
     /**
+     * 是否是首次启动
+     * */
+    private boolean inaugural = false;
+
+    /**
      * 保持连接时间
      * */
     private long KeepAliveInterval = TimeUnit.MINUTES.toMillis(1L);
@@ -68,12 +73,12 @@ public class BinlogClientConfig {
     /**
      * 读取记忆
      * */
-    private Boolean persistence;
+    private boolean persistence = false;
 
     /**
      * 部署模式
      * */
-    private BinlogClientMode mode;
+    private BinlogClientMode mode = BinlogClientMode.standalone;
 
     public String getUsername() {
         return username;
@@ -186,5 +191,13 @@ public class BinlogClientConfig {
 
     public void setTimeOffset(long timeOffset) {
         this.timeOffset = timeOffset;
+    }
+
+    public boolean isInaugural() {
+        return inaugural;
+    }
+
+    public void setInaugural(boolean inaugural) {
+        this.inaugural = inaugural;
     }
 }

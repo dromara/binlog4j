@@ -51,23 +51,18 @@ public class BinlogEventHandlerDetails<T> {
     }
 
     public Object toEntity(Serializable[] data) {
-
         String[] columnNames = JDBCUtils.getColumnNames(clientConfig, database, table);
-
-        Map<String, Object> b = new HashMap<>();
-
+        Map<String, Object> obj = new HashMap<>();
         for (int i = 0; i < data.length; i++) {
-            Serializable da = data[i];
-            if (da instanceof Date) {
-                data[i] = new Date(((Date) da).getTime() + clientConfig.getTimeOffset());
+            Serializable field = data[i];
+            if (field instanceof Date) {
+                data[i] = new Date(((Date) field).getTime() + clientConfig.getTimeOffset());
             }
-            b.put(columnNames[i], data[i]);
+            obj.put(columnNames[i], data[i]);
         }
-
         if(entityClass == null) {
-            return b;
+            return obj;
         }
-
-        return TypeUtils.cast(b, entityClass, snakeCase);
+        return TypeUtils.cast(obj, entityClass, snakeCase);
     }
 }

@@ -59,7 +59,7 @@ public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
             }
         }
         // 固化逻辑
-        if(clientConfig.getPersistence() != null && clientConfig.getPersistence()) {
+        if(clientConfig.getPersistence()) {
             if (binlogPositionHandler != null) {
                 BinlogPosition binlogPosition = new BinlogPosition();
                 if (EventType.ROTATE == eventType) {

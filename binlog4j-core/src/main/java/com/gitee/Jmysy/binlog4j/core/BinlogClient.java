@@ -38,9 +38,14 @@ public class BinlogClient implements IBinlogClient{
     private ExecutorService executor;
 
     public BinlogClient(BinlogClientConfig clientConfig) {
+        if(clientConfig.getPersistence() || clientConfig.getMode() == BinlogClientMode.cluster) {
+           if(clientConfig.getRedisConfig() == null) {
+               throw new RuntimeException("Cluster mode or persistence enabled, missing Redis configuration");
+           }
+            this.positionHandler = new RedisBinlogPositionHandler(clientConfig.getRedisConfig());
+            this.redissonClient = createRedissonClient(clientConfig.getRedisConfig());
+        }
         this.clientConfig = clientConfig;
-        this.positionHandler = new RedisBinlogPositionHandler(clientConfig.getRedisConfig());
-        this.redissonClient = createRedissonClient(clientConfig.getRedisConfig());
         this.executor = Executors.newCachedThreadPool();
     }
 
@@ -85,13 +90,14 @@ public class BinlogClient implements IBinlogClient{
             client.setHeartbeatInterval(clientConfig.getHeartbeatInterval());
             client.setConnectTimeout(clientConfig.getConnectTimeout());
             client.setServerId(clientConfig.getServerId());
-            Boolean persistence = clientConfig.getPersistence();
-            if(persistence != null && persistence) {
-                if(positionHandler != null) {
-                    BinlogPosition binlogPosition = positionHandler.loadPosition(clientConfig.getServerId());
-                    if(binlogPosition != null) {
-                        client.setBinlogFilename(binlogPosition.getFilename());
-                        client.setBinlogPosition(binlogPosition.getPosition());
+            if(clientConfig.getPersistence()) {
+                if(clientConfig.isInaugural() != true) {
+                    if(positionHandler != null) {
+                        BinlogPosition binlogPosition = positionHandler.loadPosition(clientConfig.getServerId());
+                        if(binlogPosition != null) {
+                            client.setBinlogFilename(binlogPosition.getFilename());
+                            client.setBinlogPosition(binlogPosition.getPosition());
+                        }
                     }
                 }
             }
