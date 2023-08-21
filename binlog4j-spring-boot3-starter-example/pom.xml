@@ -13,10 +13,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>binlog4j-spring-boot3-starter-example</name>
     <description>binlog4j-spring-boot3-starter-example</description>
-    <properties>
-        <java.version>17</java.version>
-    </properties>
+
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -31,7 +30,7 @@
         <dependency>
             <groupId>com.gitee.Jmysy</groupId>
             <artifactId>binlog4j-spring-boot-starter</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
