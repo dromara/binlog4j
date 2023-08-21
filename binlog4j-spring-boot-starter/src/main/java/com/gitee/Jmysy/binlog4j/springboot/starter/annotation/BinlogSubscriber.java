@@ -9,10 +9,19 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface BinlogSubscriber {
 
+    /**
+     * 客户端
+     * */
     String clientName();
 
+    /**
+     * 表名
+     * */
     String table();
 
+    /**
+     * 数据库
+     * */
     String database();
 
 }

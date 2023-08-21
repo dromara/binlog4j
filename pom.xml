@@ -13,7 +13,7 @@
 
     <properties>
         <!-- 项目版本 -->
-        <revision>0.0.1-SNAPSHOT</revision>
+        <revision>0.0.1</revision>
         <!-- 依赖版本 -->
         <lombok.version>1.18.20</lombok.version>
         <HikariCP.version>4.0.3</HikariCP.version>
@@ -95,6 +95,7 @@
     <modules>
         <module>binlog4j-core</module>
         <module>binlog4j-spring-boot-starter</module>
+        <module>binlog4j-spring-boot-starter-example</module>
     </modules>
 
     <url>https://gitee.com/Jmysy/binlog4j</url>
@@ -128,6 +129,10 @@
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/releases</url>
+        </repository>
     </distributionManagement>
 
     <build>
@@ -198,5 +203,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
