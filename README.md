@@ -29,7 +29,6 @@
 通过 BinlogClient 创建 binlog 客户端, IBinlogEventHandler 用于接受 binlog 事件通知。
 
 ```java
-
 public class BootStrap {
 
     public static void main(String[] args) {
@@ -70,7 +69,6 @@ public class BootStrap {
 ### 高级特性
 
 ```java
-
 public class BootStrap {
 
     public static void main(String[] args) {
@@ -121,7 +119,6 @@ public class BootStrap {
 在 application.yml 中填写 BinlogClient 配置
 
 ```yaml
-
 spring:
   binlog4j:
     redis-config:
@@ -141,7 +138,6 @@ spring:
 使用 @BinlogSubscriber 注解, 指定 IBinlogEventHandler 处理的表
 
 ```java
-
 @BinlogSubscriber(clientName = "master", database = "pear-admin", table ="sys_user")
 public class UserEventHandler implements IBinlogEventHandler<User> {
 
