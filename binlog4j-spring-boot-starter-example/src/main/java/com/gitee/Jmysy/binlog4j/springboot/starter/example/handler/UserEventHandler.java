@@ -1,12 +1,8 @@
 package com.gitee.Jmysy.binlog4j.springboot.starter.example.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.gitee.Jmysy.binlog4j.core.BinlogEvent;
 import com.gitee.Jmysy.binlog4j.core.IBinlogEventHandler;
 import com.gitee.Jmysy.binlog4j.springboot.starter.annotation.BinlogSubscriber;
-import com.gitee.Jmysy.binlog4j.springboot.starter.example.domain.User;
-
-import java.util.Map;
 
 @BinlogSubscriber(clientName = "master", database = ".*", table ="user.*")
 public class UserEventHandler implements IBinlogEventHandler {

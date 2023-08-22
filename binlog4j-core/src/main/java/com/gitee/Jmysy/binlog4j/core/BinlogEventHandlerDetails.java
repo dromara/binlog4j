@@ -1,9 +1,10 @@
 package com.gitee.Jmysy.binlog4j.core;
 
-import com.alibaba.fastjson.PropertyNamingStrategy;
-import com.alibaba.fastjson.parser.ParserConfig;
-import com.alibaba.fastjson.util.TypeUtils;
+import com.gitee.Jmysy.binlog4j.core.utils.ClassUtils;
 import com.gitee.Jmysy.binlog4j.core.utils.JDBCUtils;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -25,12 +26,7 @@ public class BinlogEventHandlerDetails<T> {
 
     private Class<T> entityClass;
 
-    private static final ParserConfig snakeCase;
-
-    static {
-        snakeCase = new ParserConfig();
-        snakeCase.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
-    }
+    private Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
     public void invokeInsert(String databaseName, String tableName, List<Serializable[]> data) {
         data.forEach(row -> {
@@ -76,6 +72,6 @@ public class BinlogEventHandlerDetails<T> {
         if(entityClass == null) {
             return (T) obj;
         }
-        return TypeUtils.cast(obj, entityClass, snakeCase);
+        return gson.fromJson(gson.toJson(obj), entityClass);
     }
 }
