@@ -211,17 +211,17 @@ database 与 table 使用 Pattern 匹配, 泛型不应该再被使用, data 默�
 
 ```java
 @BinlogSubscriber(clientName = "master", database = ".*", table ="sys.*")
-public class UserEventHandler implements IBinlogEventHandler<User> {
+public class UserEventHandler implements IBinlogEventHandler {
 
     @Override
-    public void onInsert(BinlogEvent<User> event) {
+    public void onInsert(BinlogEvent event) {
         System.out.println("数据库：" + event.getDatabase());
         System.out.println("数据表：" + event.getTable());
         System.out.println("新数据：" + event.getData());
     }
 
     @Override
-    public void onUpdate(BinlogEvent<User> event) {
+    public void onUpdate(BinlogEvent event) {
         System.out.println("数据库：" + event.getDatabase());
         System.out.println("数据表：" + event.getTable());
         System.out.println("原数据：" + event.getOriginalData());
@@ -229,7 +229,7 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
     }
 
     @Override
-    public void onDelete(BinlogEvent<User> event) {
+    public void onDelete(BinlogEvent event) {
         System.out.println("数据库：" + event.getDatabase());
         System.out.println("数据表：" + event.getTable());
         System.out.println("新数据：" + event.getData());
