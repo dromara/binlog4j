@@ -73,18 +73,18 @@ public class BootStrap {
         binlogClient.registerEventHandler("database", "table", new IBinlogEventHandler() {
             
             @Override
-            public void onInsert(Object data) {
-                System.out.println("插入数据:{}", data);
+            public void onInsert(BinlogEvent event) {
+                System.out.println("插入数据:{}", event.getData());
             }
 
             @Override
-            public void onUpdate(Object originalData, Object data) {
-                System.out.println("修改数据:{}", data);
+            public void onUpdate(BinlogEvent event) {
+                System.out.println("修改数据:{}", event.getData());
             }
 
             @Override
-            public void onDelete(Object data) {
-                System.out.println("删除数据:{}", data);
+            public void onDelete(BinlogEvent event) {
+                System.out.println("删除数据:{}", event.getData());
             }
         });
 
@@ -123,18 +123,18 @@ public class BootStrap {
         binlogClient.registerEventHandler("database", "table", new IBinlogEventHandler<User>() {
 
             @Override
-            public void onInsert(Object data) {
-                System.out.println("插入数据:{}", data);
+            public void onInsert(BinlogEvent<User> event) {
+                System.out.println("插入数据:{}", event.getData());
             }
 
             @Override
-            public void onUpdate(Object originalData, Object data) {
-                System.out.println("修改数据:{}", data);
+            public void onUpdate(BinlogEvent<User> event) {
+                System.out.println("修改数据:{}", event.getData());
             }
 
             @Override
-            public void onDelete(Object data) {
-                System.out.println("删除数据:{}", data);
+            public void onDelete(BinlogEvent<User> event) {
+                System.out.println("删除数据:{}", event.getData());
             }
         });
 
@@ -159,7 +159,6 @@ public class BootStrap {
 ```text
 implementation group: 'com.gitee.Jmysy', name: 'binlog4j-spring-boot-starter', version: 'latest.version'
 ```
-
 
 首先, 在 application.yml 中填写 BinlogClient 配置
 
@@ -187,18 +186,49 @@ spring:
 public class UserEventHandler implements IBinlogEventHandler<User> {
 
     @Override
-    public void onInsert(User target) {
-        System.out.println("插入数据：" + JSON.toJSONString(target));
+    public void onInsert(BinlogEvent<User> event) {
+        System.out.println("插入数据：" + event.getData());
     }
 
     @Override
-    public void onUpdate(User source, User target) {
-        System.out.println("修改数据:" + JSON.toJSONString(target));
+    public void onUpdate(BinlogEvent<User> event) {
+        System.out.println("修改数据:" + event.getData());
     }
 
     @Override
-    public void onDelete(User target) {
-        System.out.println("删除数据:" + JSON.toJSONString(target));
+    public void onDelete(BinlogEvent<User> event) {
+        System.out.println("删除数据:" + event.getData());
+    }
+
+}
+```
+
+多表监听, database 与 table 使用 Pattern 匹配, 泛型不应该再被使用, data 默认为 Map<String, Object> 类型
+
+```java
+@BinlogSubscriber(clientName = "master", database = ".*", table ="sys.*")
+public class UserEventHandler implements IBinlogEventHandler<User> {
+
+    @Override
+    public void onInsert(BinlogEvent<User> event) {
+        System.out.println("数据库：" + event.getDatabase());
+        System.out.println("数据表：" + event.getTable());
+        System.out.println("新数据：" + event.getData());
+    }
+
+    @Override
+    public void onUpdate(BinlogEvent<User> event) {
+        System.out.println("数据库：" + event.getDatabase());
+        System.out.println("数据表：" + event.getTable());
+        System.out.println("原数据：" + event.getOriginalData());
+        System.out.println("新数据：" + event.getData());
+    }
+
+    @Override
+    public void onDelete(BinlogEvent<User> event) {
+        System.out.println("数据库：" + event.getDatabase());
+        System.out.println("数据表：" + event.getTable());
+        System.out.println("新数据：" + event.getData());
     }
 
 }

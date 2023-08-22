@@ -1,4 +1,4 @@
-package com.gitee.Jmysy.binlog4j.core;
+package com.gitee.Jmysy.binlog4j.core.utils;
 
 import com.github.shyiko.mysql.binlog.event.EventType;
 

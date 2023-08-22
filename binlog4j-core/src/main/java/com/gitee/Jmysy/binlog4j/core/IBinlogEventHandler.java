@@ -5,16 +5,16 @@ public interface IBinlogEventHandler<T> {
     /**
      * 插入
      * */
-    void onInsert(T data);
+    void onInsert(BinlogEvent<T> event);
 
     /**
      * 修改
      * */
-    void onUpdate(T originalData, T data);
+    void onUpdate(BinlogEvent<T> event);
 
     /**
      * 删除
      * */
-    void onDelete(T data);
+    void onDelete(BinlogEvent<T> event);
 
 }

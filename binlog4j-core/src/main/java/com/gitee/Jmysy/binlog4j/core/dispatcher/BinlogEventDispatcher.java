@@ -2,9 +2,10 @@ package com.gitee.Jmysy.binlog4j.core.dispatcher;
 
 import com.gitee.Jmysy.binlog4j.core.BinlogClientConfig;
 import com.gitee.Jmysy.binlog4j.core.BinlogEventHandlerDetails;
-import com.gitee.Jmysy.binlog4j.core.BinlogUtils;
+import com.gitee.Jmysy.binlog4j.core.utils.BinlogUtils;
 import com.gitee.Jmysy.binlog4j.core.position.BinlogPosition;
 import com.gitee.Jmysy.binlog4j.core.position.BinlogPositionHandler;
+import com.gitee.Jmysy.binlog4j.core.utils.PatternUtils;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import lombok.Data;
@@ -37,7 +38,7 @@ public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
             String database = eventData.getDatabase();
             String table = eventData.getTable();
             eventHandlerMap.forEach(eventHandler -> {
-                if(eventHandler.getDatabase().equals(database) && eventHandler.getTable().equals(table)) {
+                if(PatternUtils.matches(eventHandler.getDatabase(), database) && PatternUtils.matches(eventHandler.getTable(), table)) {
                     tableMap.put(eventData.getTableId(), eventData);
                 }
             });
@@ -49,10 +50,10 @@ public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
                     String database = tableMapEventData.getDatabase();
                     String table = tableMapEventData.getTable();
                     this.eventHandlerMap.forEach((eventHandler) -> {
-                        if(eventHandler.getDatabase().equals(database) && eventHandler.getTable().equals(table)) {
-                            if(BinlogUtils.isUpdate(eventType)) eventHandler.invokeUpdate(rowMutationEventData.getUpdateRows());
-                            if(BinlogUtils.isDelete(eventType)) eventHandler.invokeDelete(rowMutationEventData.getDeleteRows());
-                            if(BinlogUtils.isInsert(eventType)) eventHandler.invokeInsert(rowMutationEventData.getInsertRows());
+                        if(PatternUtils.matches(eventHandler.getDatabase(), database) && PatternUtils.matches(eventHandler.getTable(), table)) {
+                            if(BinlogUtils.isUpdate(eventType)) eventHandler.invokeUpdate(database, table, rowMutationEventData.getUpdateRows());
+                            if(BinlogUtils.isDelete(eventType)) eventHandler.invokeDelete(database, table, rowMutationEventData.getDeleteRows());
+                            if(BinlogUtils.isInsert(eventType)) eventHandler.invokeInsert(database, table, rowMutationEventData.getInsertRows());
                         }
                     });
                 }

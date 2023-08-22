@@ -80,7 +80,6 @@ public class BinlogClient implements IBinlogClient{
             }
         }
     }
-
     public void runWithStandalone() {
         try {
             client = new BinaryLogClient(clientConfig.getHost(), clientConfig.getPort(), clientConfig.getUsername(), clientConfig.getPassword());

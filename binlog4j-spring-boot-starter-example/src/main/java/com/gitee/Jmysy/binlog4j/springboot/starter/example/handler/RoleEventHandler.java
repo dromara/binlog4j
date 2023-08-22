@@ -1,24 +1,25 @@
 package com.gitee.Jmysy.binlog4j.springboot.starter.example.handler;
 
-import com.alibaba.fastjson.JSON;
+import com.gitee.Jmysy.binlog4j.core.BinlogEvent;
 import com.gitee.Jmysy.binlog4j.core.IBinlogEventHandler;
 import com.gitee.Jmysy.binlog4j.springboot.starter.annotation.BinlogSubscriber;
+import com.gitee.Jmysy.binlog4j.springboot.starter.example.domain.User;
 
-@BinlogSubscriber(clientName = "master", database = "taoren", table ="user")
-public class RoleEventHandler implements IBinlogEventHandler {
+@BinlogSubscriber(clientName = "master", database = "pearadmin", table ="user")
+public class RoleEventHandler implements IBinlogEventHandler<User> {
 
     @Override
-    public void onInsert(Object data) {
-        System.out.println("没有类型:" + JSON.toJSONString(data));
+    public void onInsert(BinlogEvent<User> event) {
+
     }
 
     @Override
-    public void onUpdate(Object originalData, Object data) {
-        System.out.println("没有类型:" + JSON.toJSONString(data));
+    public void onUpdate(BinlogEvent event) {
+
     }
 
     @Override
-    public void onDelete(Object data) {
-        System.out.println("没有类型:" + JSON.toJSONString(data));
+    public void onDelete(BinlogEvent event) {
+
     }
 }

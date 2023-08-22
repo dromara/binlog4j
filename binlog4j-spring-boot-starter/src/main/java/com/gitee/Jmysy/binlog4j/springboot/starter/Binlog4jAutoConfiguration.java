@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(Binlog4jAutoProperties.class)
 public class Binlog4jAutoConfiguration {
     private Binlog4jAutoProperties binlog4jAutoProperties;
+
     public Binlog4jAutoConfiguration(Binlog4jAutoProperties properties) {
         this.binlog4jAutoProperties = properties;
         RedisConfig redisConfig = binlog4jAutoProperties.getRedisConfig();

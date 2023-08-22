@@ -16,12 +16,16 @@ public @interface BinlogSubscriber {
 
     /**
      * 表名
+     *
+     * 默认应用到所有 client 的所有 database 的所有 table
      * */
-    String table();
+    String table() default ".*";
 
     /**
      * 数据库
+     *
+     * 默认应用到所有 client 的所有 database 的所有 table
      * */
-    String database();
+    String database() default ".*";
 
 }

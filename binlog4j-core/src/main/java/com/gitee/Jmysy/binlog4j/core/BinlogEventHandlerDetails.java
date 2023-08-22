@@ -32,26 +32,39 @@ public class BinlogEventHandlerDetails<T> {
         snakeCase.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
     }
 
-    public void invokeInsert(List<Serializable[]> data) {
+    public void invokeInsert(String databaseName, String tableName, List<Serializable[]> data) {
         data.forEach(row -> {
-            eventHandler.onInsert(toEntity(row));
+            BinlogEvent<T> binlogEvent = new BinlogEvent<>();
+            binlogEvent.setDatabase(databaseName);
+            binlogEvent.setTable(tableName);
+            binlogEvent.setData(toEntity(row, databaseName, tableName));
+            eventHandler.onInsert(binlogEvent);
         });
     }
 
-    public void invokeUpdate(List<Map.Entry<Serializable[], Serializable[]>> data) {
+    public void invokeUpdate(String databaseName, String tableName, List<Map.Entry<Serializable[], Serializable[]>> data) {
         data.forEach(row ->  {
-            eventHandler.onUpdate(toEntity(row.getKey()), toEntity(row.getValue()));
+            BinlogEvent<T> binlogEvent = new BinlogEvent<>();
+            binlogEvent.setDatabase(databaseName);
+            binlogEvent.setTable(tableName);
+            binlogEvent.setData(toEntity(row.getKey(), databaseName, tableName));
+            binlogEvent.setOriginalData(toEntity(row.getValue(), databaseName, tableName));
+            eventHandler.onUpdate(binlogEvent);
         });
     }
 
-    public void invokeDelete(List<Serializable[]> data) {
+    public void invokeDelete(String databaseName, String tableName, List<Serializable[]> data) {
         data.forEach(row -> {
-            eventHandler.onDelete(toEntity(row));
+            BinlogEvent<T> binlogEvent = new BinlogEvent<>();
+            binlogEvent.setDatabase(databaseName);
+            binlogEvent.setTable(tableName);
+            binlogEvent.setData(toEntity(row, databaseName, tableName));
+            eventHandler.onDelete(binlogEvent);
         });
     }
 
-    public Object toEntity(Serializable[] data) {
-        String[] columnNames = JDBCUtils.getColumnNames(clientConfig, database, table);
+    public T toEntity(Serializable[] data, String databaseName, String tableName) {
+        String[] columnNames = JDBCUtils.getColumnNames(clientConfig, databaseName, tableName);
         Map<String, Object> obj = new HashMap<>();
         for (int i = 0; i < data.length; i++) {
             Serializable field = data[i];
@@ -61,7 +74,7 @@ public class BinlogEventHandlerDetails<T> {
             obj.put(columnNames[i], data[i]);
         }
         if(entityClass == null) {
-            return obj;
+            return (T) obj;
         }
         return TypeUtils.cast(obj, entityClass, snakeCase);
     }
