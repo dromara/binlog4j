@@ -179,6 +179,8 @@ spring:
 
 ```
 
+### 单表监听
+
 使用 @BinlogSubscriber 注解, 指定 IBinlogEventHandler 需要注册到哪个客户端, 并且指定监听的 database 与 table。
 
 ```java
@@ -203,7 +205,9 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
 }
 ```
 
-多表监听, database 与 table 使用 Pattern 匹配, 泛型不应该再被使用, data 默认为 Map<String, Object> 类型
+### 多表监听
+
+database 与 table 使用 Pattern 匹配, 泛型不应该再被使用, data 默认为 Map<String, Object> 类型
 
 ```java
 @BinlogSubscriber(clientName = "master", database = ".*", table ="sys.*")
