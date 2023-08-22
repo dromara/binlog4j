@@ -54,7 +54,7 @@ implementation group: 'com.gitee.Jmysy', name: 'binlog4j-core', version: 'latest
 
 ### 简单使用
 
-通过 BinlogClient 创建 binlog 客户端, IBinlogEventHandler 用于接受 binlog 事件通知。
+通过 BinlogClient 创建 binlog 客户端, IBinlogEventHandler 用于接受 binlog 事件通知, 该接口允许使用泛型, 数据将遵循驼峰规则进行封装。
 
 ```java
 public class BootStrap {
@@ -95,6 +95,8 @@ public class BootStrap {
 ```
 
 ### 高级特性
+
+通过 Persistence 配置为 true 启用宕机续读功能, Binlog4j 会将 binlog 的 filename 与 position 记录到 redis, 所以同时你需要设置 Redis 配置。
 
 ```java
 public class BootStrap {
@@ -159,7 +161,7 @@ implementation group: 'com.gitee.Jmysy', name: 'binlog4j-spring-boot-starter', v
 ```
 
 
-在 application.yml 中填写 BinlogClient 配置
+首先, 在 application.yml 中填写 BinlogClient 配置
 
 ```yaml
 spring:
@@ -178,7 +180,7 @@ spring:
 
 ```
 
-使用 @BinlogSubscriber 注解, 指定 IBinlogEventHandler 处理的表
+使用 @BinlogSubscriber 注解, 指定 IBinlogEventHandler 需要注册到哪个客户端, 并且指定监听的 database 与 table。
 
 ```java
 @BinlogSubscriber(clientName = "master", database = "pear-admin", table ="sys_user")
