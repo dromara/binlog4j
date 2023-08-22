@@ -1,18 +1,40 @@
-## binlog4j
 
-轻量级 Java Binlog 客户端，提供 高可用集群，宕机续读 等。
+<h2 align="center">Binlog4j</h2>
 
----------------
- 
-集群模式, 通过集群部署的方式，保证服务高可用。
- 
-宕机续读, 避免宕机期间造成数据丢失。 
+<p align="center">
+	<strong>轻量级 Mysql Binlog 客户端, 提供宕机续读, 高可用集群等特性</strong>
+</p>
 
-数据转换，基于泛型封装 binlog Event 的序列化数据。
- 
-兼容 传统项目 与 Spring Boot / Cloud 项目。
- 
-兼容 Spring Boot 2.x 与 Spring Boot 3.x 版本。
+<p align="center">
+    <a href="http://www.apache.org/licenses/LICENSE-2.0.html" target="_blank">
+        <img src="http://img.shields.io/:license-apache-brightgreen.svg" >
+    </a>
+    <a href="https://central.sonatype.com/search?q=binlog4j&smo=true" target="_blank">
+        <img src="https://img.shields.io/maven-central/v/com.gitee.Jmysy/binlog4j" />
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/JDK-1.8+-green.svg" >
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/springBoot-2.0+-green.svg" >
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/springBoot-3.0+-green.svg" >
+    </a>
+</p>
+
+## 简介
+
+- 集群模式, 通过集群部署的方式，保证服务高可用。
+
+- 宕机续读, 避免宕机期间造成数据丢失。
+
+- 数据转换, 基于泛型封装 binlog Event 的序列化数据。
+
+- 兼容 传统项目 与 Spring Boot / Cloud 项目。
+
+- 兼容 Spring Boot 2.x 与 Spring Boot 3.x 版本。
+
 
 ### 下载安装
 
@@ -91,7 +113,7 @@ public class BootStrap {
         clientConfig.setPassword("taoren@123");
         clientConfig.setServerId(1990); // Client 编号
         clientConfig.setRedisConfig(redisConfig); // Redis 配置
-        clientConfig.setPersistence(true); // 启用持久化
+        clientConfig.setPersistence(true); // 启用持久化 (宕机重启后, 从上次读取的位置开始)
         clientConfig.setMode(BinlogClientMode.cluster); // 高可用集群
 
         BinlogClient binlogClient = new BinlogClient(clientConfig);
@@ -120,7 +142,7 @@ public class BootStrap {
 
 ```
 
-### Spring Boot 集成
+### Spring Boot Starter
 
 ```agsl
 <dependency>
@@ -179,3 +201,4 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
 
 }
 ```
+

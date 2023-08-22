@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gitee.Jmysy</groupId>
   <artifactId>binlog4j</artifactId>
-  <version>0.1.5</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>binlog4j</name>
   <description>binlog4j</description>
@@ -51,7 +51,7 @@
     <HikariCP.version>4.0.3</HikariCP.version>
     <spring.boot.version>2.2.11.RELEASE</spring.boot.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>0.1.5</revision>
+    <revision>1.0.0</revision>
     <lombok.version>1.18.20</lombok.version>
     <maven.compiler.target>1.8</maven.compiler.target>
     <mysql.binlog.version>0.28.0</mysql.binlog.version>
@@ -65,12 +65,12 @@
       <dependency>
         <groupId>com.gitee.Jmysy</groupId>
         <artifactId>binlog4j-core</artifactId>
-        <version>0.1.5</version>
+        <version>1.0.0</version>
       </dependency>
       <dependency>
         <groupId>com.gitee.Jmysy</groupId>
         <artifactId>binlog4j-spring-boot-starter</artifactId>
-        <version>0.1.5</version>
+        <version>1.0.0</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
