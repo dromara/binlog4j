@@ -39,11 +39,14 @@
 
 #### 1.2.0
 
+- [新增] BinlogClient 类 connect 方法日志打印。
 - [新增] Binlog4jException.class 代替 RuntimeException.class 异常处理。
-- [新增] binlog4j-spring-boot-starter 包 spring.binlog4j.enabled 配置, 是否启用全局监听, 默认为 true。
+- [新增] binlog4j-spring-boot-starter 包 spring.binlog4j.enabled 配置, 默认为 true。
+- [新增] GsonUtils 工具类到 utils 包。
+- [升级] spring-boot 到 2.7.14 版本。
 - [升级] redisson 到 3.23.3 版本。
-- [升级] jedis 到 4.4.3 版本。
 - [升级] gson 依赖到 2.10.1 版本。
+- [升级] jedis 到 4.4.3 版本。
 
 #### 1.1.1
 
@@ -233,7 +236,7 @@ public class UserEventHandler implements IBinlogEventHandler<User> {
 
 ### 多表监听
 
-database 与 table 使用 Pattern 匹配, 泛型不应该再被使用, data 默认为 Map<String, Object> 类型
+@BinlogSubscriber 注解 database 与 table 属性支持 Pattern 匹配, IBinlogEventHandler 在不指定泛型的情况下, event.getData() 为 Map<String, Object> 类型, 用于兼容不同表的数据结构。
 
 ```java
 @BinlogSubscriber(clientName = "master", database = ".*", table ="sys.*")
@@ -263,8 +266,6 @@ public class UserEventHandler implements IBinlogEventHandler {
 
 }
 ```
-
-常用匹配规则：
 
 监听 master 数据源所有数据库中所有表的数据变化【最灵活】
 

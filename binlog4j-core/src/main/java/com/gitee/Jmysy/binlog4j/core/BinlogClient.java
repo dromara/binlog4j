@@ -24,7 +24,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class BinlogClient implements IBinlogClient{
+public class BinlogClient implements IBinlogClient {
 
     private BinlogClientConfig clientConfig;
 
@@ -83,6 +83,7 @@ public class BinlogClient implements IBinlogClient{
     }
     public void runWithStandalone() {
         try {
+            log.info("启动 Binlog 客户端 ({}) - 连接 {}:{} 服务" , clientConfig.getServerId(), clientConfig.getHost(), clientConfig.getPort());
             client = new BinaryLogClient(clientConfig.getHost(), clientConfig.getPort(), clientConfig.getUsername(), clientConfig.getPassword());
             client.registerEventListener(new BinlogEventDispatcher(this.clientConfig, positionHandler, this.eventHandlerMap));
             client.setKeepAlive(clientConfig.getKeepAlive());
