@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.gitee.Jmysy</groupId>
     <artifactId>binlog4j</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
   </parent>
   <groupId>com.gitee.Jmysy</groupId>
   <artifactId>binlog4j-core</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <name>binlog4j-core</name>
   <description>binlog4j-core</description>
   <licenses>
@@ -20,8 +20,8 @@
   </licenses>
   <dependencies>
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
     </dependency>
     <dependency>
       <groupId>com.zendesk</groupId>

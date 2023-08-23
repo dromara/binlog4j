@@ -3,12 +3,12 @@ package com.gitee.Jmysy.binlog4j.core;
 public class BinlogEvent<T> {
 
     /**
-     * Event 来源 Table
+     * 来源 Table
      * */
     private String table;
 
     /**
-     * Event 来源 Database
+     * 来源 Database
      * */
     private String database;
 

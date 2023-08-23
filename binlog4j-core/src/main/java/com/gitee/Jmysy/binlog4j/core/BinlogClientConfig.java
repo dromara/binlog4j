@@ -200,4 +200,5 @@ public class BinlogClientConfig {
     public void setInaugural(boolean inaugural) {
         this.inaugural = inaugural;
     }
+
 }
