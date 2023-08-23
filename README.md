@@ -52,11 +52,15 @@
 
 #### 1.1.0
 
-- [破坏] IBinlogEventHandler 接口入参由 T 调整为 BinlogEvent。
+- [破坏] IBinlogEventHandler 接口入参由 T 调整为 BinlogEvent<T>。
 - [新增] @BinlogSubscriber 注解 database 与 table 属性 pattern 匹配。
 - [新增] @BinlogSubscriber 注解 database 与 table 属性默认值为 .*。
 - [移动] BinlogUtils 包路径为 com.gitee.Jmysy.binlog4j.core.utils。
 - [新增] PatternUtils 内置工具 Class。
+
+#### 1.0.0
+
+- [首发] 公开框架, 收集用户建议和需求。
 
 ### 下载安装
 

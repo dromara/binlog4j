@@ -2,7 +2,7 @@ spring:
   binlog4j:
     enabled: true
     redis-config:
-      host: 123.207.217.129
+      host: 127.0.0.1
       port: 6379
       password: taoren@123
     client-configs:
@@ -12,6 +12,6 @@ spring:
         persistence: true
         username: root
         password: taoren@123
-        host: 123.207.217.129
+        host: 127.0.0.1
         port: 3306
         serverId: 1990
