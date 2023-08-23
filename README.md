@@ -252,3 +252,27 @@ public class UserEventHandler implements IBinlogEventHandler {
 }
 ```
 
+常用匹配规则：
+
+监听 master 数据源所有数据库中所有表的数据变化【最灵活】
+
+@BinlogSubscriber(clientName = "master")
+
+监听 master 数据源 pear-admin 数据库中所有表的数据变化
+
+@BinlogSubscriber(clientName = "master", database="pear-admin")
+
+监听 master 数据源 pear-admin 数据库中 user 表的数据变化
+
+@BinlogSubscriber(clientName = "master", database="pear-admin", table="user")
+
+监听 master 数据源所有数据库中 user 表的数据变化
+
+@BinlogSubscriber(clientName = "master", table="user")
+
+监听 master 数据源所有数据库中以 user 开头的表的数据变化
+
+@BinlogSubscriber(clientName = "master", table="user.*")
+
+
+
