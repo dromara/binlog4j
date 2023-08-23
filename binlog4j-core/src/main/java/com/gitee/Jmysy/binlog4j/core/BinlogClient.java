@@ -2,6 +2,7 @@ package com.gitee.Jmysy.binlog4j.core;
 
 import com.gitee.Jmysy.binlog4j.core.config.RedisConfig;
 import com.gitee.Jmysy.binlog4j.core.enums.BinlogClientMode;
+import com.gitee.Jmysy.binlog4j.core.exception.Binlog4jException;
 import com.gitee.Jmysy.binlog4j.core.position.BinlogPosition;
 import com.gitee.Jmysy.binlog4j.core.position.BinlogPositionHandler;
 import com.gitee.Jmysy.binlog4j.core.position.RedisBinlogPositionHandler;
@@ -40,7 +41,7 @@ public class BinlogClient implements IBinlogClient{
     public BinlogClient(BinlogClientConfig clientConfig) {
         if(clientConfig.getPersistence() || clientConfig.getMode() == BinlogClientMode.cluster) {
            if(clientConfig.getRedisConfig() == null) {
-               throw new RuntimeException("Cluster mode or persistence enabled, missing Redis configuration");
+               throw new Binlog4jException("Cluster mode or persistence enabled, missing Redis configuration");
            }
             this.positionHandler = new RedisBinlogPositionHandler(clientConfig.getRedisConfig());
             this.redissonClient = createRedissonClient(clientConfig.getRedisConfig());

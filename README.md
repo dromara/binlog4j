@@ -37,6 +37,13 @@
 
 ### 更新日志
 
+#### 1.2.0
+
+- [新增] Binlog4jException.class 异常类
+- [升级] redisson 到 3.23.3 版本。
+- [升级] jedis 到 4.4.3 版本。
+- [升级] gson 依赖到 2.10.1 版本。
+
 #### 1.1.1
 
 - [移除] fast-json 依赖，使用 gson 代替。
@@ -256,23 +263,33 @@ public class UserEventHandler implements IBinlogEventHandler {
 
 监听 master 数据源所有数据库中所有表的数据变化【最灵活】
 
+```text
 @BinlogSubscriber(clientName = "master")
+```
 
 监听 master 数据源 pear-admin 数据库中所有表的数据变化
 
+```text
 @BinlogSubscriber(clientName = "master", database="pear-admin")
+```
 
 监听 master 数据源 pear-admin 数据库中 user 表的数据变化
 
+```text
 @BinlogSubscriber(clientName = "master", database="pear-admin", table="user")
+```
 
 监听 master 数据源所有数据库中 user 表的数据变化
 
+```text
 @BinlogSubscriber(clientName = "master", table="user")
+```
 
 监听 master 数据源所有数据库中以 user 开头的表的数据变化
 
+```text
 @BinlogSubscriber(clientName = "master", table="user.*")
+```
 
 
 

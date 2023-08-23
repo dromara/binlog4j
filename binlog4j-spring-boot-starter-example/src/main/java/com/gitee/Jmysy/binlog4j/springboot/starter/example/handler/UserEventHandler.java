@@ -9,14 +9,17 @@ public class UserEventHandler implements IBinlogEventHandler {
 
     @Override
     public void onUpdate(BinlogEvent event) {
+        System.out.println("修改数据:" + event.getData());
     }
 
     @Override
     public void onInsert(BinlogEvent event) {
+        System.out.println("插入数据:" + event.getData());
     }
 
     @Override
     public void onDelete(BinlogEvent event) {
+        System.out.println("删除数据:" + event.getData());
     }
 
 }

@@ -6,6 +6,9 @@ import com.gitee.Jmysy.binlog4j.core.utils.MD5Utils;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Binlog Client 配置
+ * */
 public class BinlogClientConfig {
 
     /**
