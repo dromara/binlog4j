@@ -35,36 +35,6 @@
 
 - 兼容 Spring Boot 2.x 与 Spring Boot 3.x 版本。
 
-### 更新日志
-
-#### 1.2.0
-
-- [新增] BinlogClient 类 connect 方法日志打印。
-- [新增] Binlog4jException.class 代替 RuntimeException.class 异常处理。
-- [新增] binlog4j-spring-boot-starter 包 spring.binlog4j.enabled 配置, 默认为 true。
-- [新增] GsonUtils 工具类到 utils 包。
-- [升级] spring-boot 到 2.7.14 版本。
-- [升级] redisson 到 3.23.3 版本。
-- [升级] gson 依赖到 2.10.1 版本。
-- [升级] jedis 到 4.4.3 版本。
-
-#### 1.1.1
-
-- [移除] fast-json 依赖，使用 gson 代替。
-- [修复] IBinlogEventHandler 接口 data 与 originalData 相反的问题。
-
-#### 1.1.0
-
-- [破坏] IBinlogEventHandler 接口入参由 T 调整为 BinlogEvent<T>。
-- [新增] @BinlogSubscriber 注解 database 与 table 属性 pattern 匹配。
-- [新增] @BinlogSubscriber 注解 database 与 table 属性默认值为 .*。
-- [移动] BinlogUtils 包路径为 com.gitee.Jmysy.binlog4j.core.utils。
-- [新增] PatternUtils 内置工具 Class。
-
-#### 1.0.0
-
-- [首发] 公开框架, 收集用户建议和需求。
-
 ### 下载安装
 
 ```xml

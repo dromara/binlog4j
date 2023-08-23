@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gitee.Jmysy</groupId>
   <artifactId>binlog4j</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.0</version>
   <packaging>pom</packaging>
   <name>binlog4j</name>
   <description>binlog4j</description>
@@ -26,6 +26,7 @@
   </developers>
   <modules>
     <module>binlog4j-core</module>
+    <module>binlog4j-expansion</module>
     <module>binlog4j-spring-boot-starter</module>
     <module>binlog4j-spring-boot-starter-example</module>
   </modules>
@@ -47,17 +48,17 @@
   <properties>
     <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <jedis.version>3.3.0</jedis.version>
+    <jedis.version>4.4.3</jedis.version>
     <HikariCP.version>4.0.3</HikariCP.version>
-    <spring.boot.version>2.2.11.RELEASE</spring.boot.version>
+    <spring.boot.version>2.7.14</spring.boot.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>1.1.1</revision>
+    <revision>1.2.0</revision>
     <lombok.version>1.18.20</lombok.version>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <gson.version>2.8.6</gson.version>
+    <gson.version>2.10.1</gson.version>
     <mysql.binlog.version>0.28.0</mysql.binlog.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <redisson.version>3.16.5</redisson.version>
+    <redisson.version>3.23.3</redisson.version>
     <mysql.version>8.0.33</mysql.version>
   </properties>
   <dependencyManagement>
@@ -65,12 +66,12 @@
       <dependency>
         <groupId>com.gitee.Jmysy</groupId>
         <artifactId>binlog4j-core</artifactId>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
       </dependency>
       <dependency>
         <groupId>com.gitee.Jmysy</groupId>
         <artifactId>binlog4j-spring-boot-starter</artifactId>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
