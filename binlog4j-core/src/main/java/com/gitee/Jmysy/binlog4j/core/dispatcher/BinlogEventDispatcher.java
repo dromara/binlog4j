@@ -14,7 +14,6 @@ import java.io.Serializable;
 import java.util.*;
 
 public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
-
     private Map<Long, TableMapEventData> tableMap = new HashMap<>();
 
     private List<BinlogEventHandlerDetails> eventHandlerMap;

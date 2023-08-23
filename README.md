@@ -35,6 +35,20 @@
 
 - 兼容 Spring Boot 2.x 与 Spring Boot 3.x 版本。
 
+### 更新日志
+
+#### 1.1.1
+
+[移除] fast-json 依赖，使用 gson 代替。
+[修复] IBinlogEventHandler 接口 data 与 originalData 相反的问题。
+
+#### 1.1.0
+
+[破坏] IBinlogEventHandler 接口入参由 T 调整为 BinlogEvent。
+[新增] @BinlogSubscriber 注解 database 与 table 属性 pattern 匹配。
+[新增] @BinlogSubscriber 注解 database 与 table 属性默认值为 .*。
+[移动] BinlogUtils 包路径为 com.gitee.Jmysy.binlog4j.core.utils。
+[新增] PatternUtils 内置工具 Class。
 
 ### 下载安装
 
