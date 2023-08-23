@@ -15,9 +15,9 @@ import java.util.Map;
 @Data
 public class BinlogEventHandlerDetails<T> {
 
-    private String database;
+    private String databaseRegex;
 
-    private String table;
+    private String tableRegex;
 
     private IBinlogEventHandler eventHandler;
 
@@ -68,10 +68,9 @@ public class BinlogEventHandlerDetails<T> {
             }
             obj.put(columnNames[i], data[i]);
         }
-        if(entityClass == null) {
-            return (T) obj;
+        if(entityClass != null) {
+            return gson.fromJson(gson.toJson(obj), entityClass);
         }
-        String jsonStr = gson.toJson(obj);
-        return gson.fromJson(jsonStr, entityClass);
+        return (T) obj;
     }
 }

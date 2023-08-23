@@ -37,7 +37,7 @@ public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
             String database = eventData.getDatabase();
             String table = eventData.getTable();
             eventHandlerMap.forEach(eventHandler -> {
-                if(PatternUtils.matches(eventHandler.getDatabase(), database) && PatternUtils.matches(eventHandler.getTable(), table)) {
+                if(PatternUtils.matches(eventHandler.getDatabaseRegex(), database) && PatternUtils.matches(eventHandler.getTableRegex(), table)) {
                     tableMap.put(eventData.getTableId(), eventData);
                 }
             });
@@ -49,7 +49,7 @@ public class BinlogEventDispatcher implements BinaryLogClient.EventListener {
                     String database = tableMapEventData.getDatabase();
                     String table = tableMapEventData.getTable();
                     this.eventHandlerMap.forEach((eventHandler) -> {
-                        if(PatternUtils.matches(eventHandler.getDatabase(), database) && PatternUtils.matches(eventHandler.getTable(), table)) {
+                        if(PatternUtils.matches(eventHandler.getDatabaseRegex(), database) && PatternUtils.matches(eventHandler.getTableRegex(), table)) {
                             if(BinlogUtils.isUpdate(eventType)) eventHandler.invokeUpdate(database, table, rowMutationEventData.getUpdateRows());
                             if(BinlogUtils.isDelete(eventType)) eventHandler.invokeDelete(database, table, rowMutationEventData.getDeleteRows());
                             if(BinlogUtils.isInsert(eventType)) eventHandler.invokeInsert(database, table, rowMutationEventData.getInsertRows());

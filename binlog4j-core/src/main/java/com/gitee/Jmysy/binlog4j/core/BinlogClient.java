@@ -52,8 +52,8 @@ public class BinlogClient implements IBinlogClient{
 
     public void registerEventHandler(String database, String table, IBinlogEventHandler eventHandler) {
         BinlogEventHandlerDetails eventHandlerDetails = new BinlogEventHandlerDetails();
-        eventHandlerDetails.setDatabase(database);
-        eventHandlerDetails.setTable(table);
+        eventHandlerDetails.setDatabaseRegex(database);
+        eventHandlerDetails.setTableRegex(table);
         eventHandlerDetails.setClientConfig(clientConfig);
         eventHandlerDetails.setEntityClass(ClassUtils.getGenericType(eventHandler.getClass()));
         eventHandlerDetails.setEventHandler(eventHandler);
