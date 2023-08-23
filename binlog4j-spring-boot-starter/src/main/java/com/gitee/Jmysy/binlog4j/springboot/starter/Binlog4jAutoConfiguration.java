@@ -1,6 +1,7 @@
 package com.gitee.Jmysy.binlog4j.springboot.starter;
 
 import com.gitee.Jmysy.binlog4j.core.config.RedisConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ public class Binlog4jAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnProperty(prefix = "spring.binlog4j", name = "enabled", havingValue = "true", matchIfMissing = true)
     public Binlog4jInitializationBeanProcessor binlog4jAutoInitializing(Binlog4jAutoProperties properties) {
         return new Binlog4jInitializationBeanProcessor(properties.getClientConfigs());
     }

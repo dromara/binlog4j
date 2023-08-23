@@ -39,7 +39,8 @@
 
 #### 1.2.0
 
-- [新增] Binlog4jException.class 异常类
+- [新增] Binlog4jException.class 代替 RuntimeException.class 异常处理。
+- [新增] binlog4j-spring-boot-starter 包 spring.binlog4j.enabled 配置, 是否启用全局监听, 默认为 true。
 - [升级] redisson 到 3.23.3 版本。
 - [升级] jedis 到 4.4.3 版本。
 - [升级] gson 依赖到 2.10.1 版本。
