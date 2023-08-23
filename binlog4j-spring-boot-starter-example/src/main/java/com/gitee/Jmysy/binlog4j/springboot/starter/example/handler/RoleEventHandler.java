@@ -15,7 +15,8 @@ public class RoleEventHandler implements IBinlogEventHandler<User> {
 
     @Override
     public void onUpdate(BinlogEvent event) {
-        System.out.println("哈哈哈:" + event.getData().toString());
+        System.out.println("修改前:" + event.getOriginalData());
+        System.out.println("修改后:" + event.getData().toString());
     }
 
     @Override

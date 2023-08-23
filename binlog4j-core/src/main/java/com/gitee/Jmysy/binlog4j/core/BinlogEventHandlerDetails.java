@@ -1,6 +1,5 @@
 package com.gitee.Jmysy.binlog4j.core;
 
-import com.gitee.Jmysy.binlog4j.core.utils.ClassUtils;
 import com.gitee.Jmysy.binlog4j.core.utils.JDBCUtils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -43,8 +42,8 @@ public class BinlogEventHandlerDetails<T> {
             BinlogEvent<T> binlogEvent = new BinlogEvent<>();
             binlogEvent.setDatabase(databaseName);
             binlogEvent.setTable(tableName);
-            binlogEvent.setData(toEntity(row.getKey(), databaseName, tableName));
-            binlogEvent.setOriginalData(toEntity(row.getValue(), databaseName, tableName));
+            binlogEvent.setData(toEntity(row.getValue(), databaseName, tableName));
+            binlogEvent.setOriginalData(toEntity(row.getKey(), databaseName, tableName));
             eventHandler.onUpdate(binlogEvent);
         });
     }
@@ -72,6 +71,7 @@ public class BinlogEventHandlerDetails<T> {
         if(entityClass == null) {
             return (T) obj;
         }
-        return gson.fromJson(gson.toJson(obj), entityClass);
+        String jsonStr = gson.toJson(obj);
+        return gson.fromJson(jsonStr, entityClass);
     }
 }

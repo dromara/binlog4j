@@ -9,11 +9,7 @@ public class UserEventHandler implements IBinlogEventHandler {
 
     @Override
     public void onUpdate(BinlogEvent event) {
-        System.out.println("----------------------------");
-        System.out.println("数据库：" + event.getDatabase());
-        System.out.println("数据表：" + event.getTable());
-        System.out.println("新数据：" + event.getData());
-        System.out.println("原数据：" + event.getOriginalData());
+
     }
 
     @Override

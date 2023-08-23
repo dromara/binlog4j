@@ -7,11 +7,6 @@ public interface IBinlogClient {
      * */
     void connect();
 
-    /**
-     * 断开连接
-     * */
-    void disconnect();
-
      /**
       * 注册 binlog event 处理器
       *
@@ -20,4 +15,9 @@ public interface IBinlogClient {
       * @param eventHandler 事件处理器
       * */
     void registerEventHandler(String database, String table, IBinlogEventHandler eventHandler);
+
+    /**
+     * 断开连接
+     * */
+    void disconnect();
 }
