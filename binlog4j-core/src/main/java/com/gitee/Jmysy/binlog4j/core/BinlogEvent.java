@@ -22,6 +22,11 @@ public class BinlogEvent<T> {
      * */
     private T originalData;
 
+    /**
+     * 时间戳
+     * */
+    private Long timestamp;
+
     public String getDatabase() {
         return database;
     }
@@ -54,4 +59,11 @@ public class BinlogEvent<T> {
         this.originalData = originalData;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

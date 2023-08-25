@@ -33,6 +33,7 @@ public class BinlogEventHandlerDetails<T> {
             binlogEvent.setDatabase(databaseName);
             binlogEvent.setTable(tableName);
             binlogEvent.setData(toEntity(row, databaseName, tableName));
+            binlogEvent.setTimestamp(System.currentTimeMillis());
             eventHandler.onInsert(binlogEvent);
         });
     }
@@ -44,6 +45,7 @@ public class BinlogEventHandlerDetails<T> {
             binlogEvent.setTable(tableName);
             binlogEvent.setData(toEntity(row.getValue(), databaseName, tableName));
             binlogEvent.setOriginalData(toEntity(row.getKey(), databaseName, tableName));
+            binlogEvent.setTimestamp(System.currentTimeMillis());
             eventHandler.onUpdate(binlogEvent);
         });
     }
@@ -54,6 +56,7 @@ public class BinlogEventHandlerDetails<T> {
             binlogEvent.setDatabase(databaseName);
             binlogEvent.setTable(tableName);
             binlogEvent.setData(toEntity(row, databaseName, tableName));
+            binlogEvent.setTimestamp(System.currentTimeMillis());
             eventHandler.onDelete(binlogEvent);
         });
     }
