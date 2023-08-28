@@ -112,7 +112,7 @@ public class BootStrap {
         clientConfig.setPort(3306);
         clientConfig.setUsername("root");
         clientConfig.setPassword("taoren@123");
-        clientConfig.setServerId(1990); // Client 编号
+        clientConfig.setServerId(1990); // 不同集群保证客户端的唯一编码
         clientConfig.setRedisConfig(redisConfig); // Redis 配置
         clientConfig.setPersistence(true); // 启用持久化 (宕机重启后, 从上次读取的位置开始)
         clientConfig.setMode(BinlogClientMode.cluster); // 高可用集群
@@ -266,6 +266,3 @@ public class UserEventHandler implements IBinlogEventHandler {
 ```text
 @BinlogSubscriber(clientName = "master", table="user.*")
 ```
-
-
-
