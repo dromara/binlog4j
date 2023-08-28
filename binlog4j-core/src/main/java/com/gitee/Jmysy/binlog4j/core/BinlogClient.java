@@ -60,6 +60,10 @@ public class BinlogClient implements IBinlogClient {
         this.eventHandlerMap.add(eventHandlerDetails);
     }
 
+    public void registerEventHandler(IBinlogEventHandler eventHandler) {
+        this.registerEventHandler(".*",".*", eventHandler);
+    }
+
     @Override
     public void connect() {
         BinlogClientMode clientMode = clientConfig.getMode();

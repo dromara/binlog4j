@@ -1,5 +1,8 @@
 package com.gitee.Jmysy.binlog4j.core;
 
+import com.alibaba.fastjson.PropertyNamingStrategy;
+import com.alibaba.fastjson.parser.ParserConfig;
+import com.alibaba.fastjson.util.TypeUtils;
 import com.gitee.Jmysy.binlog4j.core.utils.JDBCUtils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -24,6 +27,13 @@ public class BinlogEventHandlerDetails<T> {
     private BinlogClientConfig clientConfig;
 
     private Class<T> entityClass;
+
+    private static final ParserConfig snakeCase;
+
+    static {
+        snakeCase = new ParserConfig();
+        snakeCase.propertyNamingStrategy = PropertyNamingStrategy.SnakeCase;
+    }
 
     private Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
@@ -72,7 +82,7 @@ public class BinlogEventHandlerDetails<T> {
             obj.put(columnNames[i], data[i]);
         }
         if(entityClass != null) {
-            return gson.fromJson(gson.toJson(obj), entityClass);
+            return TypeUtils.cast(obj, entityClass, snakeCase);
         }
         return (T) obj;
     }
